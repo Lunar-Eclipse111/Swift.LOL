@@ -581,7 +581,7 @@ function lib:Make(e)
 			TextLabel.Size = UDim2.new(0, 205, 0, 19);
 			TextLabel.Font = Enum.Font.Ubuntu;
 			TextLabel.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-			TextLabel.Text = "Color Picker";
+			TextLabel.Text = e.Text or "Color Picker";
 			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255);
 			TextLabel.TextSize = 14;
 			TextLabel.TextXAlignment = Enum.TextXAlignment.Left;
