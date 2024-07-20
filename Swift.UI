@@ -565,7 +565,7 @@ function lib:Make(e)
 			Action.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
 			Action.Name = "Action";
 			Action.Position = UDim2.new(0.9301587343215942, 0, 0.24137930572032928, 0);
-			Action.Size = UDim2.new(0, 15, 0, 15);
+			Action.Size = UDim2.new(0, 34, 0, 15);
 			Action.ZIndex = 2;
 			Action.Font = Enum.Font.SourceSans;
 			Action.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
