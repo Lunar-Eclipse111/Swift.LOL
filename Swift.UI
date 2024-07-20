@@ -1,0 +1,836 @@
+local lib = {tabCount = 0}
+
+
+
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+
+
+
+local function MakeDraggable(ClickObject, Object)
+	local Dragging = nil
+	local DragInput = nil
+	local DragStart = nil
+	local StartPosition = nil
+
+	ClickObject.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+			Dragging = true
+			DragStart = Input.Position
+			StartPosition = Object.Position
+
+			Input.Changed:Connect(function()
+				if Input.UserInputState == Enum.UserInputState.End then
+					Dragging = false
+				end
+			end)
+		end
+	end)
+
+	ClickObject.InputChanged:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
+			DragInput = Input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(Input)
+		if Input == DragInput and Dragging then
+			local Delta = Input.Position - DragStart
+			Object.Position = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
+		end
+	end)
+end
+
+
+
+for _,v in pairs(game.CoreGui:GetChildren()) do
+	if v.Name == "SWIFT.LOL" then
+		v:Destroy()
+	end
+end
+
+
+local SWIFTLOL = Instance.new("ScreenGui")
+SWIFTLOL.Name = "SWIFT.LOL"
+SWIFTLOL.Parent = game:GetService("CoreGui")
+function lib:Make(e)
+
+	e = e or {}
+
+
+	
+
+	local Loader = Instance.new("Frame")
+	local Color = Instance.new("Frame")
+	local PowerdBy = Instance.new("TextLabel")
+	local GameName = Instance.new("TextLabel")
+	local Image = Instance.new("ImageLabel")
+	local ImageBlacked = Instance.new("ImageLabel")
+	local Main = Instance.new("Frame")
+	local Color_2 = Instance.new("Frame")
+	local ScriptName = Instance.new("TextLabel")
+	local List = Instance.new("Frame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local TabContainers = Instance.new("Frame")
+	
+	MakeDraggable(Main, Main)
+	--Properties:
+	
+
+	
+
+
+
+	Color.Name = "Color"
+	Color.Parent = Loader
+	Color.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+	Color.BorderSizePixel = 0
+	Color.Size = UDim2.new(1, 0, 0, 1)
+
+	PowerdBy.Name = "PowerdBy"
+	PowerdBy.Parent = Loader
+	PowerdBy.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	PowerdBy.BackgroundTransparency = 1.000
+	PowerdBy.Position = UDim2.new(0.023, 0, 0, 2)
+	PowerdBy.Size = UDim2.new(0, 100, 0, 14)
+	PowerdBy.Font = Enum.Font.Ubuntu
+	PowerdBy.Text = "Powerd By SWIFT.LOL"
+	PowerdBy.TextColor3 = Color3.fromRGB(200, 200, 200)
+	PowerdBy.TextSize = 11.000
+	PowerdBy.TextXAlignment = Enum.TextXAlignment.Left
+
+	GameName.Name = "GameName"
+	GameName.Parent = Loader
+	GameName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GameName.BackgroundTransparency = 1.000
+	GameName.Position = UDim2.new(0.639999986, 0, 0, 2)
+	GameName.Size = UDim2.new(0, 100, 0, 14)
+	GameName.Font = Enum.Font.Ubuntu
+	GameName.Text = game.Name
+	GameName.TextColor3 = Color3.fromRGB(200, 200, 200)
+	GameName.TextSize = 11.000
+	GameName.TextXAlignment = Enum.TextXAlignment.Right
+
+	Image.Name = "Image"
+	Image.Parent = Loader
+	Image.AnchorPoint = Vector2.new(0.5, 0.5)
+	Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Image.BackgroundTransparency = 1.000
+	Image.Position = UDim2.new(0.479999989, 0, 0.5, 0)
+	Image.Size = UDim2.new(0, 275, 0, 275)
+	Image.ZIndex = 2
+	Image.Image = "rbxassetid://"..e.Image or   "rbxassetid://12759240856"
+
+	ImageBlacked.Name = "ImageBlacked"
+	ImageBlacked.Parent = Loader
+	ImageBlacked.AnchorPoint = Vector2.new(0.5, 0.5)
+	ImageBlacked.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ImageBlacked.BackgroundTransparency = 1.000
+	ImageBlacked.Position = UDim2.new(0.456666648, 0, 0.5, 0)
+	ImageBlacked.Size = UDim2.new(0, 275, 0, 275)
+	ImageBlacked.Image = "rbxassetid://12759240856"
+	ImageBlacked.ImageColor3 = Color3.fromRGB(0, 0, 0)
+
+	Main.Name = "Main"
+	Main.Parent = SWIFTLOL
+	Main.AnchorPoint = Vector2.new(0.5, 0.5)
+	Main.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	Main.BorderColor3 = Color3.fromRGB(75, 75, 75)
+	Main.Position = UDim2.new(0.499621153, 0, 0.499040633, 0)
+	Main.Size = UDim2.new(0, 515, 0, 348)
+	Main.Visible = true
+
+	Color_2.Name = "Color"
+	Color_2.Parent = Main
+	Color_2.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+	Color_2.BorderSizePixel = 0
+	Color_2.Size = UDim2.new(1, 0, 0, 1)
+
+	ScriptName.Name = "ScriptName"
+	ScriptName.Parent = Main
+	ScriptName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ScriptName.BackgroundTransparency = 1.000
+	ScriptName.Position = UDim2.new(0.0365922339, 0, 0.0316091962, 2)
+	ScriptName.Size = UDim2.new(0, 100, 0, 14)
+	ScriptName.Font = Enum.Font.Ubuntu
+	ScriptName.Text = "SWIFT.LOL"
+	ScriptName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	ScriptName.TextSize = 14.000
+	ScriptName.TextXAlignment = Enum.TextXAlignment.Left
+
+	List.Name = "List"
+	List.Parent = Main
+	List.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	List.BorderColor3 = Color3.fromRGB(70, 70, 70)
+	List.Position = UDim2.new(0.0213592239, 0, 0.0977011472, 0)
+	List.Size = UDim2.new(0, 134, 0, 306)
+
+	UIListLayout.Parent = List
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 3)
+
+	TabContainers.Name = "TabContainers"
+	TabContainers.Parent = Main
+	TabContainers.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	TabContainers.BorderColor3 = Color3.fromRGB(70, 70, 70)
+	TabContainers.Position = UDim2.new(0.33203885, 0, 0.0977011472, 0)
+	TabContainers.Size = UDim2.new(0, 332, 0, 306)
+	local t = {}
+	
+	function t:Tab(e)
+		e = e or {}
+		lib.tabCount = lib.tabCount +1
+
+		local main1 = Instance.new("TextButton")
+		local Tab = Instance.new("ScrollingFrame")
+		local UIListLayout = Instance.new("UIListLayout")
+		local UIPadding = Instance.new("UIPadding")
+
+		--Properties:
+
+		main1.Name = "main1"
+		main1.Parent = List
+		main1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		main1.BackgroundTransparency = 1.000
+		main1.Size = UDim2.new(0, 134, 0, 23)
+		main1.Font = Enum.Font.SourceSans
+		main1.Text = e.Text
+		main1.TextColor3 = Color3.fromRGB(200, 200, 200)
+		main1.TextSize = 17.000
+
+		Tab.Name = "Tab"
+		Tab.Parent = TabContainers
+		Tab.Active = false
+		Tab.Visible = false
+		Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Tab.BackgroundTransparency = 1.000
+		Tab.Size = UDim2.new(1, 0, 1, 0)
+		Tab.CanvasSize = UDim2.new(0, 0, 1, 0)
+		Tab.ScrollBarThickness = 2
+
+		UIListLayout.Parent = Tab
+		UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+		UIPadding.Parent = Tab
+		UIPadding.PaddingTop = UDim.new(0, 9)
+		
+		
+		
+		main1.MouseButton1Click:Connect(function()
+			for _,v in ipairs(TabContainers:GetChildren()) do --// panels
+				v.Visible = false
+			end
+			Tab.Visible = true 
+
+
+			for _,v in ipairs(List:GetChildren()) do
+				if v.Name == "main1" then
+					v.TextColor3 = Color3.fromRGB(200,200,200) --// makes the tabs textcolor red
+				end
+
+			end
+
+
+			main1.TextColor3 = Color3.fromRGB(110, 118, 250) --// makes the tab we just clicked text's green
+		end)
+		
+		
+		
+		
+		if lib.tabCount == 1 then
+			Tab.Visible = true
+			main1.TextColor3 = Color3.fromRGB(110, 118, 250)
+		end
+		
+		
+		local e = {}
+		function e:Toggle(e)
+			e = e or {}
+			e.func = e.func or function()end
+			
+
+			local Toggle = Instance.new("Frame")
+			local Action = Instance.new("TextButton")
+			local TextLabel = Instance.new("TextLabel")
+
+			--Properties:
+
+			Toggle.Name = "Toggle"
+			Toggle.Parent = Tab
+			Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Toggle.BackgroundTransparency = 1.000
+			Toggle.Position = UDim2.new(0.3493976, 0, 0, 0)
+			Toggle.Size = UDim2.new(0, 315, 0, 29)
+
+			Action.Name = "Action"
+			Action.Parent = Toggle
+			Action.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+			Action.BorderColor3 = Color3.fromRGB(70, 70, 70)
+			Action.Position = UDim2.new(0.0285714287, 0, 0.241379306, 0)
+			Action.Size = UDim2.new(0, 15, 0, 15)
+			Action.ZIndex = 2
+			Action.Font = Enum.Font.SourceSans
+			Action.Text = ""
+			Action.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Action.TextSize = 14.000
+
+			TextLabel.Parent = Toggle
+			TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.BackgroundTransparency = 1.000
+			TextLabel.Position = UDim2.new(0.101587303, 0, 0.172413796, 0)
+			TextLabel.Size = UDim2.new(0, 205, 0, 19)
+			TextLabel.Font = Enum.Font.Ubuntu
+			TextLabel.Text = e.Text
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextSize = 14.000
+			TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+			local x = false
+			
+			Action.MouseButton1Down:Connect(function()
+				if x == false then
+					x = true
+					Action.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+					pcall(e.func,true)
+				else
+					x = false
+					Action.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+					pcall(e.func,false)
+				end
+			end)
+			
+
+			
+			local f = {}
+			
+			function f:Bind(m)
+				m = m or {}
+				m.Remo = false
+				m.def = m.def
+				
+				local oldKey = m.def.Name
+				
+				local Bind = Instance.new("TextButton")
+				Bind.Name = "Bind"
+				Bind.Parent = Toggle
+				Bind.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+				Bind.BorderColor3 = Color3.fromRGB(70, 70, 70)
+				Bind.Position = UDim2.new(0.847619057, 0, 0.241379306, 0)
+				Bind.Size = UDim2.new(0, 41, 0, 15)
+				Bind.ZIndex = 2
+				Bind.AutoButtonColor = false
+				Bind.Font = Enum.Font.Ubuntu
+				Bind.Text = "["..oldKey.."]"
+				Bind.TextColor3 = Color3.fromRGB(255, 255, 255)
+				Bind.TextSize = 14.000
+				
+				local blacklist = {
+					"W","A","S","D","Slash","Tab","Backspace","Escape","Space","Delete","Unknown","Backquote"
+				}
+
+				Bind.MouseButton1Click:connect(function(e) 
+					Bind.Text = "..."
+					local a, b = game:GetService('UserInputService').InputBegan:wait();
+
+
+					if not table.find(blacklist, a.KeyCode.Name) then
+						Bind.Text = "[".. a.KeyCode.Name.."]"
+						oldKey = a.KeyCode.Name;
+					else
+						Bind.Text =	 "[NONE]"
+						oldKey = Enum.KeyCode.World55
+					end
+
+
+
+				end)
+
+				game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+
+
+
+					if not ok then 
+						if current.KeyCode.Name == oldKey then 
+							if x == false then
+								x = true
+								Action.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+								pcall(e.func,true)
+							else
+								x = false
+								pcall(e.func,false)
+								Action.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+							end
+						end
+					end
+				end)
+				
+				
+
+				
+			end
+			
+		
+			return f;
+			
+		
+
+			
+		end
+		
+		function e:Button(e)
+			e = e or {}
+			
+			e.func = e.func or function()end
+			local Button = Instance.new("Frame")
+			local Action = Instance.new("TextButton")
+
+
+			Button.Name = "Button"
+			Button.Parent = Tab
+			Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Button.BackgroundTransparency = 1.000
+			Button.Position = UDim2.new(0.3493976, 0, 0, 0)
+			Button.Size = UDim2.new(0, 315, 0, 29)
+
+			Action.Name = "Action"
+			Action.Parent = Button
+			Action.AnchorPoint = Vector2.new(0.5, 0.5)
+			Action.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+			Action.BorderColor3 = Color3.fromRGB(70, 70, 70)
+			Action.Position = UDim2.new(0.5, 0, 0.5, 0)
+			Action.Size = UDim2.new(0, 291,0, 15)
+			Action.ZIndex = 2
+			Action.AutoButtonColor = false
+			Action.Font = Enum.Font.Ubuntu
+			Action.Text = e.Text or "Button"
+			Action.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Action.TextSize = 14.000
+			
+		
+			Action.MouseButton1Down:Connect(function()
+				Action.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+				e.func()
+				wait(0.1)
+				Action.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+			end)
+			
+		end
+		
+		function e:Slider(e)
+			e = e or {}
+			local Slider = Instance.new("Frame")
+			local SliderBack = Instance.new("TextButton")
+			local SliderFill = Instance.new("Frame")
+			local SliderText = Instance.new("TextLabel")
+			local SliderValue = Instance.new("TextLabel")
+
+
+
+			Slider.Name = "Slider"
+			Slider.Parent = Tab
+			Slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Slider.BackgroundTransparency = 1.000
+			Slider.Position = UDim2.new(0.3493976, 0, 0, 0)
+			Slider.Size = UDim2.new(0, 315, 0, 29)
+
+			SliderBack.Name = "SliderBack"
+			SliderBack.Parent = Slider
+			SliderBack.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+			SliderBack.BorderColor3 = Color3.fromRGB(70, 70, 70)
+			SliderBack.Position = UDim2.new(0.0250000004, 0, 0.10317257, 3)
+			SliderBack.Size = UDim2.new(0, 299, 0, 16)
+			SliderBack.AutoButtonColor = false
+			SliderBack.Font = Enum.Font.SourceSans
+			SliderBack.Text = ""
+			SliderBack.TextColor3 = Color3.fromRGB(0, 0, 0)
+			SliderBack.TextSize = 14.000
+
+			SliderFill.Name = "SliderFill"
+			SliderFill.Parent = SliderBack
+			SliderFill.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+			SliderFill.BorderColor3 = Color3.fromRGB(70, 70, 70)
+			SliderFill.Size = UDim2.new(0.00376254227, 0, 1, 0)
+
+			SliderText.Name = "SliderText"
+			SliderText.Parent = SliderBack
+			SliderText.AnchorPoint = Vector2.new(0.5, 0.5)
+			SliderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderText.BackgroundTransparency = 1.000
+			SliderText.Position = UDim2.new(0.5, 0, 0.5, 0)
+			SliderText.Size = UDim2.new(0, 229, 0, 16)
+			SliderText.Font = Enum.Font.Ubuntu
+			SliderText.Text = e.Text
+			SliderText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			SliderText.TextSize = 14.000
+
+			SliderValue.Name = "SliderValue"
+			SliderValue.Parent = SliderBack
+			SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderValue.BackgroundTransparency = 1.000
+			SliderValue.Position = UDim2.new(0.909699082, 0, 0, 0)
+			SliderValue.Size = UDim2.new(0.0702339262, 0, 1, 0)
+			SliderValue.Font = Enum.Font.Ubuntu
+			SliderValue.Text = "0%"
+			SliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+			SliderValue.TextSize = 14.000
+			SliderValue.TextXAlignment = Enum.TextXAlignment.Right
+			
+			-----Values-----
+			e.min = e.min or 0
+			e.max = e.max or 100
+
+
+			-----Callback-----
+			e.func = e.func or function() end
+
+
+			-----Variables-----
+			local mouse = game.Players.LocalPlayer:GetMouse()
+			local uis = game:GetService("UserInputService")
+			local Value;
+			local length = SliderBack.Size.X.Offset
+			local height = SliderBack.Size.Y.Offset
+
+
+
+
+
+
+			SliderBack.MouseButton1Down:Connect(function()
+				SliderValue.Text = Value
+			end)
+
+
+
+			SliderBack.MouseButton1Down:Connect(function()
+				Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min)) or 0
+				pcall(function()
+					e.func(Value)
+				end)
+				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+				moveconnection = mouse.Move:Connect(function()
+					SliderValue.Text = Value
+					Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
+					pcall(function()
+						e.func(Value)
+					end)
+
+					SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+				end)
+				releaseconnection = uis.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
+						pcall(function()
+							e.func(Value)
+						end)
+						SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end)
+			-- touch fix
+
+			SliderBack.MouseButton1Down:Connect(function()
+				SliderValue.Text = Value
+				Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
+				pcall(function()
+					e.func(Value)
+				end)
+
+				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+			end)
+		end
+		
+		function e:ColorPicker(e)
+			e = e or{}
+			local _New_ = Instance.new;
+			
+			
+			
+
+			local Color_Picker = _New_("Frame", Tab);
+			Color_Picker.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Color_Picker.BackgroundTransparency = 1;
+			Color_Picker.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			Color_Picker.Name = "Color Picker";
+			Color_Picker.Position = UDim2.new(0.34939759969711304, 0, 0, 0);
+			Color_Picker.Size = UDim2.new(0, 315, 0, 29);
+
+			local Action = _New_("TextButton", Color_Picker);
+			Action.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+			Action.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+			Action.Name = "Action";
+			Action.Position = UDim2.new(0.9301587343215942, 0, 0.24137930572032928, 0);
+			Action.Size = UDim2.new(0, 15, 0, 15);
+			Action.ZIndex = 2;
+			Action.Font = Enum.Font.SourceSans;
+			Action.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			Action.Text = "";
+			Action.TextColor3 = Color3.fromRGB(0, 0, 0);
+			Action.TextSize = 14;
+
+			local TextLabel = _New_("TextLabel", Color_Picker);
+			TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			TextLabel.BackgroundTransparency = 1;
+			TextLabel.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			TextLabel.Position = UDim2.new(0.02857142686843872, 0, 0.17241379618644714, 0);
+			TextLabel.Size = UDim2.new(0, 205, 0, 19);
+			TextLabel.Font = Enum.Font.Ubuntu;
+			TextLabel.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			TextLabel.Text = "Color Picker";
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255);
+			TextLabel.TextSize = 14;
+			TextLabel.TextXAlignment = Enum.TextXAlignment.Left;
+
+			local ColorUI = _New_("Frame", Main);
+			ColorUI.BackgroundColor3 = Color3.fromRGB(53.00000064074993, 53.00000064074993, 53.00000064074993);
+			ColorUI.BorderColor3 = Color3.fromRGB(38.0000015348196, 38.0000015348196, 38.0000015348196);
+			ColorUI.BorderSizePixel = 0;
+			ColorUI.Name = "ColorUI";
+			ColorUI.Position = UDim2.new(-0.34496206045150757, 0, 0.20325887203216553, 0);
+			ColorUI.Size = UDim2.new(0.31713736057281494, 0, 0.4218961298465729, 0);
+			ColorUI.Visible = false;
+			ColorUI.ZIndex = 2;
+
+			local HueSat = _New_("ImageLabel", ColorUI);
+			HueSat.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			HueSat.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			HueSat.Name = "HueSat";
+			HueSat.Position = UDim2.new(0, 7, 0, 4);
+			HueSat.Size = UDim2.new(0, 148, 0, 115);
+			HueSat.ZIndex = 2;
+			HueSat.Image = "rbxassetid://698052001";
+
+			local Frame = _New_("Frame", HueSat);
+			Frame.AnchorPoint = Vector2.new(0.5, 0.5);
+			Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Frame.BackgroundTransparency = 0.20000000298023224;
+			Frame.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			Frame.Rotation = 45;
+			Frame.Size = UDim2.new(0, 4, 0, 4);
+
+			local Value = _New_("ImageLabel", ColorUI);
+			Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Value.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			Value.Name = "Value";
+			Value.Position = UDim2.new(0, 168, 0, 2);
+			Value.Size = UDim2.new(0, 20, 0, 115);
+			Value.Visible = false;
+			Value.ZIndex = 2;
+			Value.Image = "rbxassetid://3641079629";
+
+			local Frame_0 = _New_("TextLabel", Value);
+			Frame_0.AnchorPoint = Vector2.new(0, 0.5);
+			Frame_0.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Frame_0.BackgroundTransparency = 1;
+			Frame_0.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			Frame_0.Name = "Frame";
+			Frame_0.Position = UDim2.new(1, -6, 0, 0);
+			Frame_0.Size = UDim2.new(0, 16, 0, 16);
+			Frame_0.ZIndex = 2;
+			Frame_0.Font = Enum.Font.SourceSans;
+			Frame_0.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			Frame_0.Text = "◄";
+			Frame_0.TextColor3 = Color3.fromRGB(0, 0, 0);
+			Frame_0.TextSize = 12;
+			Frame_0.TextStrokeColor3 = Color3.fromRGB(130.0000074505806, 130.0000074505806, 130.0000074505806);
+			Frame_0.TextStrokeTransparency = 0;
+
+			local UICorner = _New_("UICorner", Value);
+
+			local LocalScript = _New_("LocalScript", ColorUI);
+
+			local Done = _New_("TextButton", ColorUI);
+			Done.BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871);
+			Done.BorderColor3 = Color3.fromRGB(118.00000816583633, 118.00000816583633, 118.00000816583633);
+			Done.Name = "Done";
+			Done.Position = UDim2.new(0.050999999046325684, 0, 0, 123);
+			Done.Size = UDim2.new(0, 146, 0, 20);
+			Done.ZIndex = 2;
+			Done.Font = Enum.Font.Unknown;
+			Done.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+			Done.Text = "DONE";
+			Done.TextColor3 = Color3.fromRGB(191.00000381469727, 191.00000381469727, 191.00000381469727);
+			Done.TextSize = 14;
+
+			local LocalScript_0 = _New_("LocalScript", Done);
+
+			local DragScript = _New_("LocalScript", ColorUI);
+			DragScript.Name = "DragScript";
+			
+			local op = false
+			
+			Action.MouseButton1Down:Connect(function()
+				if op == false then
+					op = true
+					ColorUI.Visible = true
+				else
+					op = false
+					ColorUI.Visible = false
+				end
+			end)
+			
+			
+			
+			--Scripts
+			task.spawn(function()--[[LocalScript]] 
+				local script = LocalScript;
+
+
+
+				local gui = ColorUI
+				local pickingHueSat = false
+				local pickingValue = false
+				local update
+				local volor = Action
+				local value = volor.BackgroundColor3
+
+				local hue = 0
+				local sat = 0
+				local val = 1
+
+				local function updateHueSat(input, obj)
+					hue = (obj.AbsoluteSize.X-(input.Position.X-obj.AbsolutePosition.X))/obj.AbsoluteSize.X
+					sat = (obj.AbsoluteSize.Y-(input.Position.Y-obj.AbsolutePosition.Y))/obj.AbsoluteSize.Y
+					return (input.Position.X-obj.AbsolutePosition.X)/obj.AbsoluteSize.X, (input.Position.Y-obj.AbsolutePosition.Y)/obj.AbsoluteSize.Y
+				end
+
+				local function updateValue(input, obj)
+					val = (obj.AbsoluteSize.Y-(input.Position.Y-obj.AbsolutePosition.Y))/obj.AbsoluteSize.Y
+					return (input.Position.Y-obj.AbsolutePosition.Y)/obj.AbsoluteSize.Y
+				end
+
+				gui.HueSat.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						pickingHueSat = true
+						input.Changed:Connect(function()
+							if input.UserInputState == Enum.UserInputState.End then
+								pickingHueSat = false
+							end
+						end)
+						local x, y = updateHueSat(input, gui.HueSat)
+						gui.HueSat.Frame.Position = UDim2.new(x,0,y,0)
+						volor.BackgroundColor3 = Color3.fromHSV(hue, sat, val)
+					end
+				end)
+
+				gui.Value.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						pickingValue = true
+						input.Changed:Connect(function()
+							if input.UserInputState == Enum.UserInputState.End then
+								pickingValue = false
+							end
+						end)
+						local y = updateValue(input, gui.Value)
+						gui.Value.Frame.Position = UDim2.new(1,-6,y,0)
+
+
+						--	gui.Color.BackgroundColor3 = Color3.fromHSV(hue, sat, val)
+
+
+
+						volor.BackgroundColor3 = Color3.fromHSV(hue, sat, val)
+
+
+
+
+
+
+
+					end
+				end)
+
+				game:GetService("UserInputService").InputChanged:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseMovement then
+						if pickingHueSat then
+							local x, y = updateHueSat(input, gui.HueSat)
+							if x <= 0 then
+								x = 0
+								hue = 1
+							end
+							if x >= 1 then
+								x = 1
+								hue = 0
+							end
+							if y <= 0 then
+								y = 0
+								sat = 1
+							end
+							if y >= 1 then
+								y = 1
+								sat = 0
+							end
+							gui.HueSat.Frame.Position = UDim2.new(x,0,y,0)
+							volor.BackgroundColor3 = Color3.fromHSV(hue,sat,val)
+
+
+
+
+
+						--	print(volor.BackgroundColor3)
+							-- Callback stuff here
+
+							pcall(function()
+								e.func(Color3.fromHSV(hue, sat, val))
+							end)
+
+						end
+						if pickingValue then
+							local y = updateValue(input, gui.Value)
+							if y <= 0 then
+								y = 0
+								val = 1
+							end
+							if y >= 1 then
+								y = 1
+								val = 0
+							end
+							gui.Value.Frame.Position = UDim2.new(1,-6,y,0)
+							volor.BackgroundColor3 = Color3.fromHSV(hue,sat,val)
+
+
+
+
+
+
+
+
+
+
+
+						end
+					end
+				end)
+
+
+			end);
+
+			task.spawn(function()--[[LocalScript_0]] 
+				local script = LocalScript_0;
+
+
+				Done.MouseButton1Down:Connect(function()
+					ColorUI.Visible = false
+					
+					op = false
+					
+				end)
+			end);
+
+
+
+		end
+		
+		return e;
+	end
+
+return t;
+end
+return lib
+
+
