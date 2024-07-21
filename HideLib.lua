@@ -113,9 +113,6 @@ Bind.TextColor3 = Color3.fromRGB(255, 255, 255);
 		end
 	end)
 end
+return Hide;
 
 
-
-local HideUI = Hide.Show({
-	def = Enum.KeyCode.J
-})
