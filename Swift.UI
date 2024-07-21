@@ -411,9 +411,17 @@ function lib:Make(e)
 			
 		
 			Action.MouseButton1Down:Connect(function()
-				Action.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+				
 				e.func()
 				wait(0.1)
+				
+			end)
+			
+			Action.MouseEnter:Connect(function()
+				Action.BackgroundColor3 = Color3.fromRGB(110, 118, 250)
+			end)
+			
+			Action.MouseLeave:Connect(function()
 				Action.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
 			end)
 			
