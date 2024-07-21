@@ -561,7 +561,7 @@ function lib:Make(e)
 			Color_Picker.Size = UDim2.new(0, 315, 0, 29);
 
 			local Action = _New_("TextButton", Color_Picker);
-			Action.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+			Action.BackgroundColor3 = e.Def or Color3.fromRGB(255, 0, 0);
 			Action.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
 			Action.Name = "Action";
 			Action.Position = UDim2.new(0.867, 0,0.241, 0);
@@ -832,5 +832,4 @@ function lib:Make(e)
 return t;
 end
 return lib
-
 
