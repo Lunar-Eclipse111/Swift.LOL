@@ -41,7 +41,7 @@ local times = 3
 	local watermark = "YOUR USING A SWIFT.LOL SCRIPT,GAME DETECTED"
 	print(watermark)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/games/Assassin'))()
-	SWIFT_Loader.Enabled = false
+	SWIFT_Loader:Destroy();
 	
 	
 
