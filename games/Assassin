@@ -49,7 +49,7 @@ getgenv().Autofarm = false
 getgenv().infJump = false
 getgenv().SilentAim = false
 getgenv().ESP = false
-
+getgenv().WS = 16
 
 
 
@@ -149,13 +149,16 @@ Game:Slider({
 })
 Game:Slider({
 	Text = "Player walkspeed",
-	max = 100,
-	min = 32,
+	max = 60,
+	min = 16,
 	func = function(e)
-		task.spawn(function()
-			game.Players.LocalPlayer.humanoid.walkspeed = e
-		   end)
-		
+	task.spawn(function()
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = e
+	end)
+
+			
+
+	
 	end
 })
 
