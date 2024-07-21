@@ -41,7 +41,7 @@ Callback = Callback or function()end
 	local watermark = "YOUR USING A SWIFT.LOL SCRIPT,GAME DETECTED"
 	print(watermark)
 	Callback()
-	Loader:Destroy()
+	Loader.Visible = false
 	
 	
 end
