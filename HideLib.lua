@@ -67,6 +67,27 @@ Bind.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeigh
 Bind.Text = "[E]";
 Bind.TextColor3 = Color3.fromRGB(255, 255, 255);
 	Bind.TextSize = 14;
+
+--Okay Btn
+
+local K = _New_("TextButton", Main);
+K.AutoButtonColor = false;
+K.BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871);
+K.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+K.Name = "K";
+K.Position = UDim2.new(0.0645642951130867, 0, 0.7585486769676208, 0);
+K.Size = UDim2.new(0, 135, 0, 19);
+K.ZIndex = 2;
+K.Font = Enum.Font.Ubuntu;
+K.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+K.Text = "Okay";
+K.TextColor3 = Color3.fromRGB(255, 255, 255);
+K.TextSize = 14;
+
+K.MouseButton1Down:Connect(function()
+Main.Visible = false
+end)
+
 	
 	local oldKey = m.def.Name
 
@@ -114,5 +135,4 @@ Bind.TextColor3 = Color3.fromRGB(255, 255, 255);
 	end)
 end
 return Hide;
-
 
