@@ -1,12 +1,12 @@
-local loader={}
+
 local _New_ = Instance.new;
 --objects
 local SWIFT_Loader = _New_("ScreenGui", game:GetService("CoreGui"));
 SWIFT_Loader.Name = "SWIFT.Loader";
 SWIFT_Loader.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
 
-function loader:Load(times,Callback)
-Callback = Callback or function()end
+local times = 3
+
 	local Loader = _New_("Frame", SWIFT_Loader);
 	Loader.AnchorPoint = Vector2.new(0.5, 0.5);
 	Loader.BackgroundColor3 = Color3.fromRGB(40.00000141561031, 40.00000141561031, 40.00000141561031);
@@ -40,9 +40,9 @@ Callback = Callback or function()end
 	wait(times)
 	local watermark = "YOUR USING A SWIFT.LOL SCRIPT,GAME DETECTED"
 	print(watermark)
-	Callback()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/games/Assassin'))()
 	SWIFT_Loader.Enabled = false
 	
 	
-end
-return loader;
+
+
