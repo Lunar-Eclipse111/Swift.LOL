@@ -54,6 +54,7 @@ Txt.Text = "HideUI";
 Txt.TextColor3 = Color3.fromRGB(157.0000058412552, 157.0000058412552, 157.0000058412552);
 Txt.TextSize = 14;
 
+	local oldKey = m.def.Name
 local Bind = _New_("TextButton", List);
 Bind.AutoButtonColor = false;
 Bind.BackgroundColor3 = Color3.fromRGB(61.00000016391277, 61.00000016391277, 61.00000016391277);
@@ -64,7 +65,7 @@ Bind.Size = UDim2.new(0, 110, 0, 19);
 Bind.ZIndex = 2;
 Bind.Font = Enum.Font.Ubuntu;
 Bind.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-Bind.Text = "[E]";
+	Bind.Text = "["..oldKey.."]";
 Bind.TextColor3 = Color3.fromRGB(255, 255, 255);
 	Bind.TextSize = 14;
 
