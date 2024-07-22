@@ -30,6 +30,6 @@ function loadr:load(tim,callback)
 	print("USING SWIFT.LOL")
 	wait(tim)
 	callback()
-LDR:Destroy()	
+
 end
 return loadr;
