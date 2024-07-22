@@ -93,6 +93,8 @@ CicleTog:Bind({
 
 aim:Slider({
 	Text = "FOV Size",
+	def = 200,
+	pfx = "%",
 	max = 300,
 	min = 0,
 	func = function(e)
@@ -140,6 +142,8 @@ local Game = main:Tab({
 
 Game:Slider({
 	Text = "Game FOV",
+	def = 70,
+	pfx = "%",
 	max = 100,
 	min = 70,
 	func = function(e)
@@ -151,6 +155,8 @@ Game:Slider({
 })
 Game:Slider({
 	Text = "Player walkspeed",
+		def = 16,
+	pfx = "%",
 	max = 60,
 	min = 16,
 	func = function(e)
@@ -200,6 +206,8 @@ getgenv.spinbot = e
 
 farmi:Slider({
 	Text = "Slider",
+	def = 16,
+	pfx = "%",
 	max = 30,
 	min = 0,
 	func = function(e)
@@ -272,5 +280,4 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/scri
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/SilentAim.lua'))()
 --Chams/ESP
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/ESP.lua'))()
-
 
