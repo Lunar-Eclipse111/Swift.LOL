@@ -1,48 +1,35 @@
-
+local loadr = {}
 local _New_ = Instance.new;
 --objects
-local SWIFT_Loader = _New_("ScreenGui", game:GetService("CoreGui"));
-SWIFT_Loader.Name = "SWIFT.Loader";
-SWIFT_Loader.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+local LDR = _New_("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+LDR.Name = "LDR";
+LDR.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
 
-local times = 3
-
-	local Loader = _New_("Frame", SWIFT_Loader);
-	Loader.AnchorPoint = Vector2.new(0.5, 0.5);
-	Loader.BackgroundColor3 = Color3.fromRGB(40.00000141561031, 40.00000141561031, 40.00000141561031);
-	Loader.BorderColor3 = Color3.fromRGB(75.00000312924385, 75.00000312924385, 75.00000312924385);
-	Loader.Name = "Loader";
-	Loader.Position = UDim2.new(0.5, 0, 0.5, 0);
-	Loader.Size = UDim2.new(0, 169, 0, 169);
-
-	local Logo = _New_("ImageLabel", Loader);
-	Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-	Logo.BackgroundTransparency = 1;
-	Logo.BorderColor3 = Color3.fromRGB(0, 0, 0);
-	Logo.BorderSizePixel = 0;
-	Logo.Name = "Logo";
-	Logo.Position = UDim2.new(0.012820773757994175, 0, 0.02083333395421505, 0);
-	Logo.Size = UDim2.new(0.9871795177459717, 0, 0.979166567325592, 0);
-	Logo.ZIndex = 2;
-	Logo.Image = "rbxassetid://12759240856";
-
-	local Shadow = _New_("ImageLabel", Loader);
-	Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-	Shadow.BackgroundTransparency = 1;
-	Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0);
-	Shadow.BorderSizePixel = 0;
-	Shadow.Name = "Shadow";
-	Shadow.Position = UDim2.new(-0.018518518656492233, 0, 0.02083333395421505, 0);
-	Shadow.Size = UDim2.new(0.9871795177459717, 0, 0.979166567325592, 0);
-	Shadow.Image = "rbxassetid://12759240856";
-	Shadow.ImageColor3 = Color3.fromRGB(107.00000882148743, 107.00000882148743, 107.00000882148743);
-
-	wait(times)
-	local watermark = "YOUR USING A SWIFT.LOL SCRIPT,GAME DETECTED"
-	print(watermark)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/games/Assassin'))()
-	SWIFT_Loader:Destroy();
+function loadr:load(tim,callback)
+	callback = callback or function() end
 	
+	local main = _New_("Frame", LDR);
+	main.AnchorPoint = Vector2.new(0.5, 0.5);
+	main.BackgroundColor3 = Color3.fromRGB(40.00000141561031, 40.00000141561031, 40.00000141561031);
+	main.BorderColor3 = Color3.fromRGB(75.00000312924385, 75.00000312924385, 75.00000312924385);
+	main.BorderSizePixel = 2;
+	main.Name = "main";
+	main.Position = UDim2.new(0.5, 0, 0.5, 0);
+	main.Size = UDim2.new(0, 200, 0, 200);
+
+	local ImageLabel = _New_("ImageLabel", main);
+	ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5);
+	ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+	ImageLabel.BackgroundTransparency = 1;
+	ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0);
+	ImageLabel.BorderSizePixel = 0;
+	ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0);
+	ImageLabel.Size = UDim2.new(0, 158, 0, 158);
+	ImageLabel.Image = "rbxassetid://12759240856";
 	
-
-
+	print("USING SWIFT.LOL")
+	wait(tim)
+	callback()
+LDR:Destroy()	
+end
+return loadr;
