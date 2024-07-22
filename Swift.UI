@@ -508,19 +508,21 @@ function lib:Make(e)
 
 
 			SliderBack.MouseButton1Down:Connect(function()
-				SliderValue.Text = Value
+				SliderValue.Text = Value..e.pfx
 			end)
 
 
 
 			SliderBack.MouseButton1Down:Connect(function()
 				Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min)) or 0
+				-- Value = e.def
+				
 				pcall(function()
 					e.func(Value)
 				end)
 				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
 				moveconnection = mouse.Move:Connect(function()
-					SliderValue.Text = Value
+					SliderValue.Text = Value..e.pfx
 					Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
 					pcall(function()
 						e.func(Value)
