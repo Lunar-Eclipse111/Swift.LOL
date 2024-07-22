@@ -481,7 +481,7 @@ function lib:Make(e)
 			SliderValue.Position = UDim2.new(0.909699082, 0, 0, 0)
 			SliderValue.Size = UDim2.new(0.0702339262, 0, 1, 0)
 			SliderValue.Font = Enum.Font.Ubuntu
-			SliderValue.Text = "0%"
+			SliderValue.Text = e.def..e.pfx..""
 			SliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
 			SliderValue.TextSize = 14.000
 			SliderValue.TextXAlignment = Enum.TextXAlignment.Right
