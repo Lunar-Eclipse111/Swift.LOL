@@ -52,7 +52,7 @@ getgenv().infJump = false
 getgenv().SilentAim = false
 getgenv().ESP = false
 getgenv().WS = 16
-
+getgenv().infJump = false
 
 
 -- Defult Colors
@@ -172,12 +172,9 @@ Game:Button({
 })
 
 local bhoptog = Game:Toggle({
-	Text = "Bhop",
+	Text = "Inf Jump",
 	func = function(e) 
-		local humanoid = script.Parent:WaitForChild("Humanoid")
-game:GetService("RunService").Heartbeat:Connect(function()
-	humanoid.Jump = v
-end)
+getgenv().infJump = e
 	end
 })
 --END GAME TAB
