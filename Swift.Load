@@ -1,7 +1,7 @@
 local loadr = {}
 local _New_ = Instance.new;
 --objects
-local LDR = _New_("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+local LDR = _New_("ScreenGui", game.CoreGui );--game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 LDR.Name = "LDR";
 LDR.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
 
