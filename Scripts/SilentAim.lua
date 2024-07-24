@@ -7,7 +7,7 @@ local Player = game:GetService("Players").LocalPlayer
     FOV_Circle.Thickness = 2.5
     FOV_Circle.NumSides = 8
     FOV_Circle.Radius = 200
-    
+    getgenv().SilentAim = false
     FOV_Circle.Visible = false
     FOV_Circle.Filled = false
 
