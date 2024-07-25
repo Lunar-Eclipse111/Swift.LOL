@@ -1,0 +1,441 @@
+
+
+
+(function()
+    if shared.assassinmtbypass then return; end;
+    
+    local real = getrenv().gcinfo
+    
+    getrenv().gcinfo = function(...)
+        if not checkcaller() then return real(...); end;
+        
+        local call = getcallingscript();
+        if call and tostring(call):find("Animator") then
+            local func = ...;
+            local con = debug.getconstants(func);
+            if con[1] and con[1] == "" and con[2] and con[2]:find"\n" then
+                return 2500;
+            end
+        end
+        
+        return real(...)
+    end
+end)();
+
+-- game.CoreGui.LDR:Destroy();
+
+local watermark = "SWIFT.LOL V.1.3"
+local watermarkPlacement = game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.nKills
+local Shadow = game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.nKills.ShadowText
+watermarkPlacement.Text = watermark
+Shadow.Text = watermark
+
+local ttable = {"BALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLS", "COCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCKCOCK"}
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP:Toggle(true);
+ESP.Players = true;
+ESP.Tracers = false;
+ESP.Boxes = false;
+ESP.Names = false;
+ESP.Enabled = false
+ESP.Thickness = 2;
+
+
+local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/main/Swift.UI'))()
+
+
+
+--getgenv().spinbot = false
+--getgenv().Spinspeed = 12
+getgenv().Autofarm = false
+getgenv().infJump = false
+getgenv().SilentAim = false
+getgenv().ESP = false
+getgenv().WS = 16
+getgenv().infJump = false
+
+
+-- Defult Colors
+
+-- main ui color
+getgenv().UIClr = Color3.fromRGB(110, 118, 250)
+getgenv().ESPClr = UIClr
+getgenv().FOVClr = UIClr
+
+local main = lib:Make({
+
+	Image = 12759240856
+})
+-- Aim Section
+local aim = main:Tab({
+	Text = "Silent Aim"
+})
+
+local AimTog = aim:Toggle({
+	Text = "Enable",
+	func = function(e) 
+		getgenv().SilentAim = e
+	end
+})
+AimTog:Bind({
+	def = Enum.KeyCode.X
+})
+
+local CicleTog = aim:Toggle({
+	Text = "Show FOV",
+	func = function(e) 
+		FOV_Circle.Visible = e
+	end
+})
+CicleTog:Bind({
+	def = Enum.KeyCode.C
+})
+
+aim:Slider({
+	Text = "FOV Size",
+	def = 200,
+	pfx = "%",
+	max = 300,
+	min = 0,
+	func = function(e)
+		FOV_Circle.Radius = e
+	end
+})
+
+aim:ColorPicker({
+	Text = "FOV Color",
+	Def = getgenv().FOVClr,
+	func = function(e)
+		FOV_Circle.Color = e
+	end
+})
+-- Aim Section End
+
+
+-- Visual section start
+
+local vis = main:Tab({
+	Text = "ESP/Visual"
+})
+
+local vistog = vis:Toggle({
+	Text = "Enable Chams",
+	func = function(e) 
+		getgenv().ESP = e
+	end
+})
+
+vis:ColorPicker({
+	Text = "Chams Color",
+	Def = getgenv().ESPClr,
+	func = function(e)
+		getgenv().ESPClr = e
+	end
+})
+
+-- END VISUAL TAB
+
+-- START GAME TAB
+local Game = main:Tab({
+	Text = "Game"
+})
+
+Game:Slider({
+	Text = "Game FOV",
+	def = 70,
+	pfx = "%",
+	max = 100,
+	min = 70,
+	func = function(e)
+		task.spawn(function()
+			workspace.CurrentCamera.FieldOfView = e
+		   end)
+		
+	end
+})
+Game:Slider({
+	Text = "Player walkspeed",
+		def = 16,
+	pfx = "%",
+	max = 60,
+	min = 16,
+	func = function(e)
+	task.spawn(function()
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = e
+	end)
+
+			
+
+	
+	end
+})
+
+Game:Button({
+	Text = "Reset gravity",
+	func = function()
+		workspace.Gravity = 196.2;
+	end
+})
+
+local bhoptog = Game:Toggle({
+	Text = "Inf Jump",
+	func = function(e) 
+getgenv().infJump = e
+	end
+})
+--END GAME TAB
+
+--START AUTOFARM TAB
+local farmi = main:Tab({
+	Text = "Autofarm"
+})
+
+local farm = farmi:Toggle({
+	Text = "Start Autofarm",
+	func = function(e) 
+	getgenv().Autofarm = e
+	end
+})
+
+getgenv().PathFinding = false
+getgenv().nocliptoggle = true
+
+local farm = farmi:Toggle({
+	Text = "Start PathFinder (COMMING SOON)  ",
+	func = function(e) 
+		getgenv().PathFinding = e
+		getgenv().nocliptoggle = e
+	end
+})
+getgenv().spinbot = false
+
+_G.RealSpeed = 0
+
+_G.updateSpeed = 0
+
+local Spinbot = farmi:Toggle({
+	Text = "SpinBot",
+	func = function(e) 
+		getgenv().spinbot = e
+
+        if e == false then
+			_G.updateSpeed = _G.updateSpeed
+			wait(0.1)
+_G.RealSpeed = 0
+        end
+
+if e == true then
+	_G.RealSpeed = _G.updateSpeed
+end
+
+	end
+})
+local WaitFunc = 0
+
+
+
+farmi:Slider({
+	Text = "Spinbot Speed",
+	def = 16,
+	pfx = "%",
+	max = 30,
+	min = 0,
+	func = function(e)
+		if getgenv().spinbot == true then
+		_G.RealSpeed = e
+		end
+
+if getgenv().spinbot == false then
+	_G.updateSpeed = e
+end
+	end
+})
+
+farmi:Button({
+	Text = "Ghost Coin Collect",
+	func = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/GhostCoin.lua'))()
+	end
+})
+-- END AUTOFARM TAB
+
+-- START ANIMATION TAB
+local an = main:Tab({
+	Text = "Animations"
+})
+
+--Crawl ANIMATION START
+local a1 = "282574440"
+local a2 = Instance.new("Animation")
+a2.AnimationId = "rbxassetid://"..a1
+local a = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(a2)
+a:AdjustSpeed(4) 
+-- Crawl ANIMATION END
+
+--lay ANIMATION START
+local b1 = "181526230"
+local b2 = Instance.new("Animation")
+b2.AnimationId = "rbxassetid://"..b1
+local b = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(b2)
+b:AdjustSpeed(4) 
+-- lay ANIMATION END
+
+
+
+
+
+local farm = an:Toggle({
+	Text = "Crawl animation",
+	func = function(e) 
+	if e == true then
+a:Play()
+	else
+		a:Stop()
+	end
+	end
+})
+
+local farm = an:Toggle({
+	Text = "Lay animation",
+	func = function(e) 
+	if e == true then
+b:Play()
+	else
+		b:Stop()
+	end
+	end
+})
+
+
+
+
+
+
+-- START FREEPLAY TAB
+_G.AutoPickup = false
+
+local farmi = main:Tab({
+	Text = "Freeplay"
+})
+
+local farm = farmi:Toggle({
+	Text = "Auto Collect powerups",
+	func = function(e) 
+		_G.AutoPickup = e
+	end
+})
+--END FREEPLAY TAB
+
+
+-- START RANDOM TAB
+local ran = main:Tab({
+	Text = "Random"
+})
+
+ran:ColorPicker({
+	Text = "Progress Bar Color",
+	func = function(e)
+		game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.TopLevelBar.BackgroundColor3 = e
+	end
+})
+local WMtextColor = game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.nKills
+ran:ColorPicker({
+	Text = "Watermark Color",
+	func = function(e)
+WMtextColor.TextColor3 = e
+	end
+})
+
+ran:Button({
+	Text = "Remove VIP",
+	func = function()
+		game.workspace.Lobby.VIPBarrier:Destroy()
+	end
+})
+
+
+
+
+
+
+local Hide = loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/HideLib.lua'))()
+
+local HideUI = Hide.Show({
+	def = Enum.KeyCode.E
+})
+
+
+
+
+
+
+if getgenv().spinbot == true then
+_G.RealSpeed = _G.RealSpeed
+end
+
+if getgenv().spinbot == false then
+_G.RealSpeed = 0
+end
+
+task.spawn(function()
+        game:GetService("RunService").Heartbeat:connect(function()
+            local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+            -- spining
+        hrp.CFrame = hrp.CFrame * CFrame.Angles(0,math.rad(_G.RealSpeed),0)
+        wait(0.01)
+
+
+        end)
+    end)
+
+
+
+--END SCRIPTS
+
+-- autofarm
+--  WORKING AUTO FARM loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/scripts/main/farm.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/scripts/main/farm.lua'))()
+--Inf Jump
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/scripts/main/infjump.lua'))()
+-- anti afk
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/scripts/main/antiafk.lua'))()
+-- spinbot
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/AssassinSpinbot'))()
+--Auto bypass
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/scripts/main/bypass.lua'))()
+--Silent Aim
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/SilentAim.lua'))()
+--Chams/ESP
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/ESP.lua'))()
+
+
+
+
+
+
+
+
+
+while _G.AutoPickup do
+for i, v in pairs(game.Workspace.KnifeHost.PowerUps:GetChildren()) do
+
+	if v:IsA("Part") then
+		
+	 local Player = game.Players.LocalPlayer.Character
+   
+	 local Target = v.CFrame
+   
+   
+   
+	 Player.HumanoidRootPart.CFrame = CFrame.new(Target.Position.X, Target.Position.Y, Target.Position.Z)
+   
+	end
+   
+   end
+   
+   wait(0.25)
+   
+end
+   
+   
