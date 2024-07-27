@@ -10,11 +10,11 @@ local HttpService = game:GetService("HttpService")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
-for _,v in pairs(game.CoreGui:GetChildren()) do
-	if v.Name == "SWIFT.LOL" then
-	v:Destroy()
-	end
-end
+--for _,v in pairs(game.CoreGui:GetChildren()) do
+--	if v.Name == "SWIFT.LOL" then
+--	v:Destroy()
+--	end
+--end
 
 
 local function MakeDraggable(ClickObject, Object)
@@ -1054,5 +1054,5 @@ function lib:Draw(e)
 	return t;
 end
 
-return lib;
+ return lib;
 
