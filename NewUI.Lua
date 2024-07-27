@@ -649,7 +649,7 @@ function lib:Draw(e)
 			Action.TextSize = 14;
 
 			local Color = _New_("Frame", ColorPicker);
-			Color.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+			Color.BackgroundColor3 = e.def or Color3.fromRGB(255, 0, 0);
 			Color.BorderColor3 = Color3.fromRGB(72.00000330805779, 72.00000330805779, 72.00000330805779);
 			Color.Name = "Color";
 			Color.Position = UDim2.new(0.008001483045518398, 0, -0.21699905395507812, 4);
