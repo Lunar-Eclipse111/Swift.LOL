@@ -964,7 +964,7 @@ function lib:Draw(e)
 			SliderText.Size = UDim2.new(0, 76, 0, 8);
 			SliderText.Font = Enum.Font.SourceSans;
 			SliderText.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-			SliderText.Text = "Slider";
+			SliderText.Text = e.Text or "SLIDER | TEXT NOT FOUND";
 			SliderText.TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041);
 			SliderText.TextSize = 14;
 			SliderText.TextXAlignment = Enum.TextXAlignment.Left;
