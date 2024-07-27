@@ -900,6 +900,153 @@ function lib:Draw(e)
 		end
 		
 		
+		function a:Slider(e)
+			e = e or {}
+
+			local Slider = _New_("Frame", nil);
+			Slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Slider.BackgroundTransparency = 1;
+			Slider.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			Slider.BorderSizePixel = 0;
+			Slider.Name = "Slider";
+			Slider.Position = UDim2.new(0.06790123134851456, 0, 0.16778509318828583, 0);
+			Slider.Size = UDim2.new(0, 142, 0, 32);
+
+			local SliderBack = _New_("TextButton", Slider);
+			SliderBack.AutoButtonColor = false;
+			SliderBack.BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871);
+			SliderBack.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+			SliderBack.Name = "SliderBack";
+			SliderBack.Position = UDim2.new(0.035211268812417984, 0, -0.125, 15);
+			SliderBack.Size = UDim2.new(0, 132, 0, 9);
+			SliderBack.Font = Enum.Font.SourceSans;
+			SliderBack.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			SliderBack.Text = "";
+			SliderBack.TextColor3 = Color3.fromRGB(0, 0, 0);
+			SliderBack.TextSize = 14;
+
+			local SliderFill = _New_("Frame", SliderBack);
+			SliderFill.BackgroundColor3 = Color3.fromRGB(110.00000104308128, 118.00000056624413, 250.00000029802322);
+			SliderFill.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+			SliderFill.Name = "SliderFill";
+			SliderFill.Size = UDim2.new(0, 0, 1, 0);
+
+			local SliderValue = _New_("TextLabel", SliderFill);
+			SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			SliderValue.BackgroundTransparency = 1;
+			SliderValue.Name = "SliderValue";
+			SliderValue.Position = UDim2.new(1, 8, 0, 8);
+			SliderValue.Size = UDim2.new(0.07023392617702484, 0, 1, 0);
+			SliderValue.Font = Enum.Font.SourceSans;
+			SliderValue.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			SliderValue.Text = "0%";
+			SliderValue.TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041);
+			SliderValue.TextSize = 14;
+			SliderValue.TextXAlignment = Enum.TextXAlignment.Right;
+
+			local UIPadding = _New_("UIPadding", SliderValue);
+			UIPadding.PaddingLeft = UDim.new(0, 9);
+
+			local UIGradient = _New_("UIGradient", SliderFill);
+			UIGradient.Rotation = -83;
+			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.5187499523162842, 0), NumberSequenceKeypoint.new(1, 0.8187500238418579, 0)};
+
+			local UIGradient_0 = _New_("UIGradient", SliderBack);
+			UIGradient_0.Rotation = -83;
+			UIGradient_0.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.5187499523162842, 0), NumberSequenceKeypoint.new(1, 0.8187500238418579, 0)};
+
+			local SliderText = _New_("TextLabel", Slider);
+			SliderText.AnchorPoint = Vector2.new(0.5, 0.5);
+			SliderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			SliderText.BackgroundTransparency = 1;
+			SliderText.Name = "SliderText";
+			SliderText.Position = UDim2.new(0.26989102363586426, 0, -0.125, 5);
+			SliderText.Size = UDim2.new(0, 76, 0, 8);
+			SliderText.Font = Enum.Font.SourceSans;
+			SliderText.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			SliderText.Text = "Slider";
+			SliderText.TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041);
+			SliderText.TextSize = 14;
+			SliderText.TextXAlignment = Enum.TextXAlignment.Left;
+			
+
+			if e.Side == "L" then
+				Slider.Parent = LeftFrame
+			end
+			if e.Side == "R" then
+				Slider.Parent = Right_Frame
+			end
+			
+			
+			-----Values-----
+			e.min = e.min or 0
+			e.max = e.max or 100
+
+
+			-----Callback-----
+			e.func = e.func or function() end
+
+
+			-----Variables-----
+			local mouse = game.Players.LocalPlayer:GetMouse()
+			local uis = game:GetService("UserInputService")
+			local Value;
+			local length = SliderBack.Size.X.Offset
+			local height = SliderBack.Size.Y.Offset
+
+
+
+
+
+
+			SliderBack.MouseButton1Down:Connect(function()
+				SliderValue.Text = Value..e.prefix
+			end)
+
+
+
+			SliderBack.MouseButton1Down:Connect(function()
+				Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min)) or 0
+				-- Value = e.def
+
+				pcall(function()
+					e.func(Value)
+				end)
+				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+				moveconnection = mouse.Move:Connect(function()
+					SliderValue.Text = Value..e.prefix
+					Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
+					pcall(function()
+						e.func(Value)
+					end)
+
+					SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+				end)
+				releaseconnection = uis.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
+						pcall(function()
+							e.func(Value)
+						end)
+						SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end)
+			-- touch fix
+
+			SliderBack.MouseButton1Down:Connect(function()
+				SliderValue.Text = Value..e.prefix
+				Value = math.floor((((tonumber(e.max) - tonumber(e.min)) / length) * SliderFill.AbsoluteSize.X) + tonumber(e.min))
+				pcall(function()
+					e.func(Value)
+				end)
+
+				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, length), 0, height)
+			end)
+		end
+		
 		
 		return a;
 	end
