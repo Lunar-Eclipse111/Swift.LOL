@@ -1,4 +1,47 @@
 local Hide = {}
+
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+
+
+
+local function MakeDraggable(ClickObject, Object)
+	local Dragging = nil
+	local DragInput = nil
+	local DragStart = nil
+	local StartPosition = nil
+
+	ClickObject.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+			Dragging = true
+			DragStart = Input.Position
+			StartPosition = Object.Position
+
+			Input.Changed:Connect(function()
+				if Input.UserInputState == Enum.UserInputState.End then
+					Dragging = false
+				end
+			end)
+		end
+	end)
+
+	ClickObject.InputChanged:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
+			DragInput = Input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(Input)
+		if Input == DragInput and Dragging then
+			local Delta = Input.Position - DragStart
+			Object.Position = UDim2.new(StartPosition.X.Scale, StartPosition.X.Offset + Delta.X, StartPosition.Y.Scale, StartPosition.Y.Offset + Delta.Y)
+		end
+	end)
+end
+
 local _New_ = Instance.new;
 
 local Remove = _New_("ScreenGui", game.CoreGui);
@@ -64,6 +107,10 @@ function Hide:Show(m)
 	Bind.TextColor3 = Color3.fromRGB(255, 255, 255);
 	Bind.TextSize = 14;
 
+	
+	MakeDraggable(Main, Main)
+
+	
 	local LocalScript = _New_("LocalScript", Bind);
 
 	local UIStroke = _New_("UIStroke", Main);
