@@ -19,7 +19,7 @@
     end
 end)();
 
--- game.CoreGui.LDR:Destroy();
+--game.CoreGui.LDR:Destroy();
 
 local watermark = "SWIFT.LOL V.1.3"
 local watermarkPlacement = game.Players.LocalPlayer.PlayerGui.ScreenGui.UI.nKills
@@ -400,3 +400,8 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swif
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/assassin/TpSilentAim'))()
 --Chams/ESP
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Lunar-Eclipse111/Swift.LOL/Scripts/Scripts/assassin/Highlight%20ESP'))()
+
+
+
+
+
