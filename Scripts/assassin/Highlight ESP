@@ -6,8 +6,8 @@ local LocalRootPart
 local LocalHumanoid
 
 
-_G.ESPToggle = getgenv().ESP or false
-_G.TargetESP = getgenv().Target or false-- Add1 - Variable storing if user wants the target ESP enabled, change to false if you don't want it 
+_G.ESPToggle = false
+_G.TargetESP = false-- Add1 - Variable storing if user wants the target ESP enabled, change to false if you don't want it 
 
 do
     local function characterAdded(Character)
@@ -53,7 +53,7 @@ local function addHighlightToCharacter(player, character)
         highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
         
         if player == Target and _G.TargetESP == true then -- Add2 - check if the TargetESP variable is true, if it is assign red, otherwise assign blue
-            highlightClone.FillColor = getgenv().Target or Color3.fromRGB(255, 0, 0)  -- Set the fill color to red for target
+            highlightClone.FillColor = getgenv().TargetClr or Color3.fromRGB(255, 0, 0)  -- Set the fill color to red for target
         else
             highlightClone.FillColor = getgenv().ESPClr or Color3.fromRGB(0, 0, 255)  -- Set the fill color to blue for non-targets
         end
