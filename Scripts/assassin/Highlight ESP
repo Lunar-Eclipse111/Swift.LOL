@@ -1,0 +1,102 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Backpack = LocalPlayer.Backpack
+local LocalCharacter = LocalPlayer.Character
+local LocalRootPart
+local LocalHumanoid
+
+
+_G.ESPToggle = getgenv().ESP or false
+_G.TargetESP = getgenv().Target or false-- Add1 - Variable storing if user wants the target ESP enabled, change to false if you don't want it 
+
+do
+    local function characterAdded(Character)
+        if typeof(Character) ~= "Instance" then return end
+        LocalCharacter = Character
+        LocalRootPart = Character:WaitForChild("HumanoidRootPart")
+        LocalHumanoid = Character:WaitForChild("Humanoid")
+    end
+    characterAdded(LocalCharacter)
+    LocalPlayer.CharacterAdded:Connect(characterAdded)
+end
+
+local UI = LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("ScreenGui"):WaitForChild("UI")
+local TargetFrame = UI.Target
+local TargetVisible = TargetFrame.Visible
+local TargetText = TargetFrame.TargetText
+local Target = TargetVisible and Players:FindFirstChild(TargetText.Text)
+local TargetCharacter
+local TargetRootPart
+
+TargetFrame.Changed:Connect(function()
+    TargetVisible = TargetFrame.Visible
+end)
+TargetText.Changed:Connect(function()
+    Target = Players:FindFirstChild(TargetText.Text)
+end)
+
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+
+local function getCharacter(player)
+    return workspace:FindFirstChild(player.Name)
+end
+
+local function addHighlightToCharacter(player, character)
+    if player == LocalPlayer then return end  -- Skip local player
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart and not humanoidRootPart:FindFirstChild("Highlight") then
+        local highlightClone = Instance.new("Highlight")  -- Create a new Highlight instance
+        highlightClone.Name = "Highlight"
+        highlightClone.Adornee = character
+        highlightClone.Parent = humanoidRootPart
+        highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        
+        if player == Target and _G.TargetESP == true then -- Add2 - check if the TargetESP variable is true, if it is assign red, otherwise assign blue
+            highlightClone.FillColor = Color3.fromRGB(255, 0, 0)  -- Set the fill color to red for target
+        else
+            highlightClone.FillColor = Color3.fromRGB(0, 0, 255)  -- Set the fill color to blue for non-targets
+        end
+        
+        highlightClone.OutlineColor = Color3.fromRGB(255, 255, 255)
+        highlightClone.FillTransparency = 0.5  -- Set the fill transparency (0 - 1)
+    end
+end
+
+local function removeHighlightFromCharacter(character)
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        local highlightInstance = humanoidRootPart:FindFirstChild("Highlight")
+        if highlightInstance then
+            highlightInstance:Destroy()
+        end
+    end
+end
+
+-- Connect events through RenderStepped to loop
+RunService.RenderStepped:Connect(function()
+    if _G.ESPToggle == true then
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = getCharacter(player)
+            if character then
+                removeHighlightFromCharacter(character)
+                addHighlightToCharacter(player, character)
+            end
+        end
+    end
+end)
+
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        if _G.ESPToggle then
+            addHighlightToCharacter(player, character)
+        end
+    end)
+end)
+
+Players.PlayerRemoving:Connect(function(playerRemoved)
+    local character = playerRemoved.Character
+    if character then
+        removeHighlightFromCharacter(character)
+    end
+end)
