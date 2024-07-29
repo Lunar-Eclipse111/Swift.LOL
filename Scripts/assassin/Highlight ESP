@@ -53,9 +53,9 @@ local function addHighlightToCharacter(player, character)
         highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
         
         if player == Target and _G.TargetESP == true then -- Add2 - check if the TargetESP variable is true, if it is assign red, otherwise assign blue
-            highlightClone.FillColor = Color3.fromRGB(255, 0, 0)  -- Set the fill color to red for target
+            highlightClone.FillColor = getgenv().Target or Color3.fromRGB(255, 0, 0)  -- Set the fill color to red for target
         else
-            highlightClone.FillColor = Color3.fromRGB(0, 0, 255)  -- Set the fill color to blue for non-targets
+            highlightClone.FillColor = getgenv().ESPClr or Color3.fromRGB(0, 0, 255)  -- Set the fill color to blue for non-targets
         end
         
         highlightClone.OutlineColor = Color3.fromRGB(255, 255, 255)
