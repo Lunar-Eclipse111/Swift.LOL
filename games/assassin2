@@ -120,6 +120,7 @@ local vis = main:Tab({
 	Right = "Configuration"
 })
 
+-- ESP TOGGLES
 local toggle = vis:Toggle({
 	Text = "Enable ESP",
 	Side = "L",
@@ -134,13 +135,14 @@ local toggle = vis:Toggle({
 		_G.TargetESP = e
 	end
 })
-
+-- ESP TOGGLES END
+-- ESP COLORS
 local ColorPicker = vis:ColorPicker({
 	Text = "Regular Player Color",
 	Side = "R",
 	def = getgenv().ESPClr,
 	func = function(e)
-		getgenv().ESPClr = e
+		_G.EspClr = e
 	end
 })
 
@@ -152,6 +154,8 @@ local ColorPicker = vis:ColorPicker({
 		_G.TargetClr = e
 	end
 })
+
+-- ESP COLORS END
 -- VISUAL TAB END
 
 -- PLAYER TAB
@@ -168,15 +172,17 @@ local toggle = playa:Toggle({
 		getgenv().infJump = e
 	end
 })
+
+local char = game.Players.LocalPlayer.Character
+
 getgenv().FF = false
 local toggle = playa:Toggle({
 	Text = "Forcfield character",
 	Side = "L",
 	func = function(e)
-		getgenv().FF = e
+		 getgenv().FF = e
 		if e == true then
 			getgenv().FF = true
-			
 			local RunService = game:GetService("RunService")
 			char.Head.Material = Enum.Material.ForceField
 			char.Torso.Material = Enum.Material.ForceField
@@ -199,6 +205,12 @@ local toggle = playa:Toggle({
 		end
 	end
 })
+local head = char.Head.Color
+local torso = char.Torso.Color
+local legl = char["Left Leg"].Color
+local legR = char["Left Leg"].Color
+local arml = char["Left Arm"].Color
+local armR = char["Right Arm"].Color
 
 local btn = playa:Button({
 	Text = "Reset Gravity",
@@ -214,7 +226,6 @@ local ColorPicker = playa:ColorPicker({
 	def = getgenv().ESPClr,
 	func = function(e)
 		if getgenv().FF == true then
-
 			char.Head.Color = e
 			char.Torso.Color = e
 			char["Left Leg"].Color = e
@@ -222,6 +233,15 @@ local ColorPicker = playa:ColorPicker({
 			char["Left Arm"].Color = e
 			char["Right Arm"].Color = e
 			end
+
+			if getgenv().FF == false then
+				char.Head.Color = head
+				char.Torso.Color = torso
+				char["Left Leg"].Color = legl
+				char["Right Leg"].Color = legR
+				char["Left Arm"].Color = arml
+				char["Right Arm"].Color = armR
+				end
 	end
 })
 
@@ -349,21 +369,38 @@ local ani = main:Tab({
 	Right = "Crawl"
 })
 
-local toggle = farm:Toggle({
+
+
+local toggle = ani:Toggle({
 	Text = "Lay",
 	Side = "L",
 	func = function(e)
-		_G.Lay = e
 
+		if e == true then
+			wait()
+			local b1 = "181526230"
+			local b2 = Instance.new("Animation")
+			b2.AnimationId = "rbxassetid://"..b1
+			local b = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(b2)
+			b:AdjustSpeed(4) 
+			b:Play()
+		end
+
+		if e == false then
+			wait()
+
+			b:Stop()
+		end
        
 
 	end
 })
 
-
-
-
 -- Animation tab end
+
+
+-- HIDE GUI SCRIPT
+
 -- SPINBOT SCRIPT
 if getgenv().spinbot == true then
 	_G.RealSpeed = _G.RealSpeed
