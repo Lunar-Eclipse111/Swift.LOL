@@ -964,7 +964,7 @@ function lib:Draw(e)
 			SliderText.Size = UDim2.new(0, 76, 0, 8);
 			SliderText.Font = Enum.Font.SourceSans;
 			SliderText.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-			SliderText.Text = e.Text or "SLIDER | TEXT NOT FOUND";
+			SliderText.Text = "Slider";
 			SliderText.TextColor3 = Color3.fromRGB(168.0000051856041, 168.0000051856041, 168.0000051856041);
 			SliderText.TextSize = 14;
 			SliderText.TextXAlignment = Enum.TextXAlignment.Left;
@@ -1048,6 +1048,96 @@ function lib:Draw(e)
 		end
 		
 		
+		function a:GuiToggle(e)
+			e = e or {}
+			
+			e.Bind = e.Bind
+
+			local oldKey = e.Bind.Name
+			
+			
+			local GuiToggle = _New_("Frame", nil);
+			GuiToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			GuiToggle.BackgroundTransparency = 1;
+			GuiToggle.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			GuiToggle.BorderSizePixel = 0;
+			GuiToggle.Name = "GuiToggle";
+			GuiToggle.Position = UDim2.new(0.05000000074505806, 0, 0.2248803824186325, 0);
+			GuiToggle.Size = UDim2.new(0, 135, 0, 16);
+
+			local Text = _New_("TextLabel", GuiToggle);
+			Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Text.BackgroundTransparency = 1;
+			Text.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			Text.BorderSizePixel = 0;
+			Text.Name = "Text";
+			Text.Position = UDim2.new(0.007407407276332378, 0, -0.047618865966796875, 0);
+			Text.Size = UDim2.new(0.6074073910713196, 0, 0.8306198120117188, 0);
+			Text.Font = Enum.Font.Ubuntu;
+			Text.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			Text.Text = "Gui Toggle Bind";
+			Text.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
+			Text.TextSize = 12;
+			Text.TextXAlignment = Enum.TextXAlignment.Left;
+
+			local Bind = _New_("TextButton", GuiToggle);
+			Bind.AutoButtonColor = false;
+			Bind.BackgroundColor3 = Color3.fromRGB(61.00000016391277, 61.00000016391277, 61.00000016391277);
+			Bind.BackgroundTransparency = 1;
+			Bind.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+			Bind.Name = "Bind";
+			Bind.Position = UDim2.new(0.8560000061988831, 0, -0.21400000154972076, 2);
+			Bind.Size = UDim2.new(0, 19, 0, 15);
+			Bind.ZIndex = 2;
+			Bind.Font = Enum.Font.Ubuntu;
+			Bind.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			Bind.Text = "["..oldKey.."]" or "[LeftCtrl]";
+			Bind.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
+			Bind.TextSize = 12;
+			
+			local blacklist = {
+				"W","A","S","D","Slash","Tab","Backspace","Escape","Space","Delete","Unknown","Backquote"
+			}
+
+			Bind.MouseButton1Click:connect(function(e) 
+				Bind.Text = "..."
+				local a, b = game:GetService('UserInputService').InputBegan:wait();
+
+
+				if not table.find(blacklist, a.KeyCode.Name) then
+					Bind.Text = "[".. a.KeyCode.Name.."]"
+					oldKey = a.KeyCode.Name;
+				else
+					Bind.Text =	 "[NONE]"
+					oldKey = Enum.KeyCode.World55
+				end
+
+
+
+			end)
+			local x = true
+			game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+
+
+				if not ok then 
+					if current.KeyCode.Name == oldKey then 
+						if x == false then
+							x = true
+							--	print("Open")
+
+							Main.Visible = true		
+						else
+							x = false
+							Main.Visible = false
+						end
+					end
+				end
+			end)
+			
+		end
+		
+		
+		
 		return a;
 	end
 	
@@ -1055,4 +1145,3 @@ function lib:Draw(e)
 end
 
  return lib;
-
