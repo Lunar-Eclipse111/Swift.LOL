@@ -10,11 +10,11 @@ local HttpService = game:GetService("HttpService")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
---for _,v in pairs(game.CoreGui:GetChildren()) do
---	if v.Name == "SWIFT.LOL" then
---	v:Destroy()
---	end
---end
+for _,v in pairs(game.CoreGui:GetChildren()) do
+	if v.Name == "SWIFT.LOL" then
+	v:Destroy()
+	end
+end
 
 
 local function MakeDraggable(ClickObject, Object)
@@ -1095,6 +1095,13 @@ function lib:Draw(e)
 			Bind.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
 			Bind.TextSize = 12;
 			
+			if e.Side == "L" then
+				GuiToggle.Parent = LeftFrame
+			end
+			if e.Side == "R" then
+				GuiToggle.Parent = Right_Frame
+			end
+			
 			local blacklist = {
 				"W","A","S","D","Slash","Tab","Backspace","Escape","Space","Delete","Unknown","Backquote"
 			}
@@ -1144,4 +1151,5 @@ function lib:Draw(e)
 	return t;
 end
 
- return lib;
+return lib;
+
