@@ -1142,7 +1142,57 @@ function lib:Draw(e)
 			end)
 			
 		end
-		
+
+
+		function a:TextBox(e)
+			e = e or {}
+			e.func = e.func or function()end
+			local TextBox = _New_("Frame", nil);
+			TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			TextBox.BackgroundTransparency = 1;
+			TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			TextBox.BorderSizePixel = 0;
+			TextBox.Name = "TextBox";
+			TextBox.Position = UDim2.new(0.05000000074505806, 0, 0.8177340030670166, 0);
+			TextBox.Size = UDim2.new(0, 135, 0, 28);
+
+			local TextBox_0 = _New_("TextBox", TextBox);
+			TextBox_0.BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871);
+			TextBox_0.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			TextBox_0.BorderSizePixel = 0;
+			TextBox_0.Position = UDim2.new(0.04444444552063942, 0, 0.1987173855304718, 0);
+			TextBox_0.Size = UDim2.new(0, 122, 0, 16);
+			TextBox_0.Font = Enum.Font.Ubuntu;
+			TextBox_0.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			TextBox_0.PlaceholderText = e.Text or "Couldent Find Text";
+			TextBox_0.Text = "";
+			TextBox_0.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
+			TextBox_0.TextSize = 14;
+
+			local UICorner = _New_("UICorner", TextBox_0);
+			UICorner.CornerRadius = UDim.new(0, 4);
+
+			local UIGradient = _New_("UIGradient", TextBox_0);
+			UIGradient.Rotation = -83;
+			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.5187499523162842, 0), NumberSequenceKeypoint.new(1, 0.8187500238418579, 0)};
+
+			local UIStroke = _New_("UIStroke", TextBox_0);
+			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+			UIStroke.Color = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+
+			TextBox_0.FocusLost:Connect(function()
+				e.func()
+			end)
+			
+			
+			if e.Side == "L" then
+				TextBox.Parent = LeftFrame
+			end
+			if e.Side == "R" then
+				TextBox.Parent = Right_Frame
+			end
+			
+		end
 		
 		
 		return a;
