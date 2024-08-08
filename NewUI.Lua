@@ -1180,8 +1180,12 @@ function lib:Draw(e)
 			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
 			UIStroke.Color = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
 
+			local value = TextBox_0.Text
+			
 			TextBox_0.FocusLost:Connect(function()
-				e.func()
+				
+				value = TextBox_0.Text
+				e.func(value)
 			end)
 			
 			
