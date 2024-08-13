@@ -1364,6 +1364,7 @@ function lib:Draw(e)
 
 						ScrollingFrame.Transparency = 1
 						f = false
+end)
 			end
 			
 			
