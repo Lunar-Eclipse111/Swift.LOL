@@ -1298,16 +1298,20 @@ function lib:Draw(e)
 					f = true
 					TweenService:Create(
 						Container,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{Size = UDim2.new(0.518, 0,0, 96)}
+						TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{Size = UDim2.new(1.015, 0,-7.592, 0)}
 					):Play()
+					ScrollingFrame.Transparency = 0
 				else
 					f = false
 					TweenService:Create(
 						Container,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{Size = UDim2.new(0.518,	0, 0.03999999910593033, 0)}
+						TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{Size = UDim2.new(1.015, 0,0, 0)}
 					):Play()
+
+					ScrollingFrame.Transparency = 1
+
 				end
 			end)
 			
@@ -1326,7 +1330,7 @@ function lib:Draw(e)
 				DropItem.ZIndex = 6;
 				DropItem.Font = Enum.Font.SourceSans;
 				DropItem.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-				DropItem.Text = "ItemText";
+				DropItem.Text = v;
 				DropItem.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
 				DropItem.TextSize = 14;
 
