@@ -1352,16 +1352,18 @@ function lib:Draw(e)
 				UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.5187499523162842, 0), NumberSequenceKeypoint.new(1, 0.8187500238418579, 0)};
 
 
-				DropItem.MouseButton1Down:Connect(function()
-					SelectedOption.Text = ""..v
-					e.func(v)
-					TweenService:Create(
-						Container,
-						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{Size = UDim2.new(0.518,	0, 0.03999999910593033, 0)}
-					):Play()
-					f = false
-				end)
+					DropItem.MouseButton1Down:Connect(function()
+						SelectedOption.Text = ""..v
+						e.func(v)
+						
+							TweenService:Create(
+								Container,
+								TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+								{Size = UDim2.new(1.015, 0,0.04, 0)}
+							):Play()
+
+						ScrollingFrame.Transparency = 1
+						f = false
 			end
 			
 			
