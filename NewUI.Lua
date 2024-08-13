@@ -1299,7 +1299,7 @@ function lib:Draw(e)
 					TweenService:Create(
 						Container,
 						TweenInfo.new(.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{Size = UDim2.new(1.015, 0,-7.592, 0)}
+						{Size = UDim2.new(1.015, 0,7.684, 0)}
 					):Play()
 					ScrollingFrame.Transparency = 0
 				else
