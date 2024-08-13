@@ -1195,10 +1195,183 @@ function lib:Draw(e)
 			if e.Side == "R" then
 				TextBox.Parent = Right_Frame
 			end
-			
 		end
 		
+		function a:DropDown(e)
+			e = e or {}
+			
+			e.list = e.list or {}
+			e.func = e.func or function()end
+			
+			local Drop = _New_("Frame",nil);
+			Drop.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			Drop.BackgroundTransparency = 1;
+			Drop.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			Drop.BorderSizePixel = 0;
+			Drop.Name = "Drop";
+			Drop.Position = UDim2.new(0.0533333346247673, 0, 0, 0);
+			Drop.Size = UDim2.new(0, 134, 0, 19);
+
+			local Action = _New_("TextButton", Drop);
+			Action.AutoButtonColor = false;
+			Action.BackgroundColor3 = Color3.fromRGB(57.00000420212746, 57.00000420212746, 57.00000420212746);
+			Action.BackgroundTransparency = 1;
+			Action.BorderColor3 = Color3.fromRGB(93.00000205636024, 93.00000205636024, 93.00000205636024);
+			Action.Name = "Action";
+			Action.Size = UDim2.new(1, 0, 1, 0);
+			Action.Font = Enum.Font.SourceSans;
+			Action.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			Action.Text = "";
+			Action.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
+			Action.TextSize = 14;
+
+			local DropName = _New_("TextLabel", Drop);
+			DropName.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			DropName.BackgroundTransparency = 1;
+			DropName.BorderColor3 = Color3.fromRGB(0, 0, 0);
+			DropName.BorderSizePixel = 0;
+			DropName.Name = "DropName";
+			DropName.Size = UDim2.new(1, 0, 1, 0);
+			DropName.Font = Enum.Font.SourceSans;
+			DropName.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+			DropName.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
+			DropName.TextSize = 14;
+			DropName.TextXAlignment = Enum.TextXAlignment.Left;
+
+			local Container = _New_("Frame", Drop);
+			Container.BackgroundColor3 = Color3.fromRGB(35.00000171363354, 35.00000171363354, 35.00000171363354);
+			Container.BackgroundTransparency = 1;
+			Container.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			Container.BorderSizePixel = 0;
+			Container.Name = "Container";
+			Container.Position = UDim2.new(-0.003403848735615611, 0, 0.9599995017051697, 0);
+			Container.Size = UDim2.new(1.0149253606796265, 0, 0.040000513195991516, 0);
+
+			local ScrollingFrame = _New_("ScrollingFrame", Container);
+			ScrollingFrame.BackgroundColor3 = Color3.fromRGB(22.000000588595867, 21.000000648200512, 21.000000648200512);
+			ScrollingFrame.BorderColor3 = Color3.fromRGB(70.00000342726707, 70.00000342726707, 70.00000342726707);
+			ScrollingFrame.Position = UDim2.new(-0.006804073695093393, 0, 0, 0);
+			ScrollingFrame.Size = UDim2.new(1, 0, 1, 0);
+			ScrollingFrame.ZIndex = 6;
+			ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y;
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 1, 0);
+			ScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0);
+			ScrollingFrame.ScrollBarThickness = 0;
+			
+			
+
+			local SelectedOption = _New_("TextLabel", Drop);
+			SelectedOption.BackgroundColor3 = Color3.fromRGB(77.00000301003456, 77.00000301003456, 77.00000301003456);
+			SelectedOption.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+			SelectedOption.BorderSizePixel = 0;
+			SelectedOption.Name = "SelectedOption";
+			SelectedOption.Position = UDim2.new(0.48166942596435547, 0, 0.1400018036365509, 0);
+			SelectedOption.Size = UDim2.new(0, 63, 0, 13);
+			SelectedOption.Font = Enum.Font.SourceSansBold;
+			SelectedOption.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+			SelectedOption.Text = "Bind";
+			SelectedOption.TextColor3 = Color3.fromRGB(255, 255, 255);
+			SelectedOption.TextSize = 14;
+
+			local UIGradient = _New_("UIGradient", SelectedOption);
+			UIGradient.Rotation = -83;
+			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.5187499523162842, 0), NumberSequenceKeypoint.new(1, 0.8187500238418579, 0)};
+
+			local UIStroke = _New_("UIStroke", SelectedOption);
+			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+			UIStroke.Color = Color3.fromRGB(74.0000031888485, 74.0000031888485, 74.0000031888485);
+
+			local UICorner = _New_("UICorner", SelectedOption);
+			UICorner.CornerRadius = UDim.new(0, 2);
+			
+			
+			if e.Side == "L" then
+				Drop.Parent = LeftFrame
+			end
+			if e.Side == "R" then
+				Drop.Parent = Right_Frame
+			end
+			
+			local f = false
+			Action.MouseButton1Down:Connect(function()
+				if f == false then
+					f = true
+					TweenService:Create(
+						Container,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{Size = UDim2.new(0.518, 0,0, 96)}
+					):Play()
+				else
+					f = false
+					TweenService:Create(
+						Container,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{Size = UDim2.new(0.518,	0, 0.03999999910593033, 0)}
+					):Play()
+				end
+			end)
+			
+			
+			
+			for i,v in next,	e.list do
+
+
+				local DropItem = _New_("TextButton", ScrollingFrame);
+				DropItem.BackgroundColor3 = Color3.fromRGB(2.000000118277967, 12.000000234693289, 22.000000588595867);
+				DropItem.BackgroundTransparency = 1;
+				DropItem.BorderColor3 = Color3.fromRGB(27.000002190470695, 42.000001296401024, 53.000004440546036);
+				DropItem.Name = "DropItem";
+				DropItem.Position = UDim2.new(0.029411764815449715, 0, 0, 0);
+				DropItem.Size = UDim2.new(0.904411792755127, 0, -0.07573488354682922, 23);
+				DropItem.ZIndex = 6;
+				DropItem.Font = Enum.Font.SourceSans;
+				DropItem.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+				DropItem.Text = "ItemText";
+				DropItem.TextColor3 = Color3.fromRGB(172.00000494718552, 172.00000494718552, 172.00000494718552);
+				DropItem.TextSize = 14;
+
+				local Color = _New_("Frame", DropItem);
+				Color.BackgroundColor3 = Color3.fromRGB(77.00000301003456, 77.00000301003456, 77.00000301003456);
+				Color.BorderColor3 = Color3.fromRGB(72.00000330805779, 72.00000330805779, 72.00000330805779);
+				Color.Name = "Color";
+				Color.Size = UDim2.new(1, 0, 1, 0);
+				Color.ZIndex = 6;
+
+				local UICorner = _New_("UICorner", Color);
+				UICorner.CornerRadius = UDim.new(0, 2);
+
+				local UIStroke = _New_("UIStroke", Color);
+				UIStroke.Color = Color3.fromRGB(74.0000031888485, 74.0000031888485, 74.0000031888485);
+
+				local UIGradient = _New_("UIGradient", Color);
+				UIGradient.Rotation = -83;
+				UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0.5187499523162842, 0), NumberSequenceKeypoint.new(1, 0.8187500238418579, 0)};
+
+
+				DropItem.MouseButton1Down:Connect(function()
+					SelectedOption.Text = ""..v
+					e.func(v)
+					TweenService:Create(
+						Container,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{Size = UDim2.new(0.518,	0, 0.03999999910593033, 0)}
+					):Play()
+					f = false
+				end)
+			end
+			
+			
+
+			local UIListLayout = _New_("UIListLayout", ScrollingFrame);
+			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center;
+			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder;
+
+			local UIPadding = _New_("UIPadding", ScrollingFrame);
+			UIPadding.PaddingTop = UDim.new(0, 3);
+		end
 		
+
+
 		return a;
 	end
 	
